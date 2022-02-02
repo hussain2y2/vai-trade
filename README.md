@@ -62,4 +62,6 @@ There are some points which can be really impact on the results like adding/remo
 
 1. **Starships API Response** is not always in same format, so if we make it more readable like the `passengers` and `crew` are sometimes numbers, but sometimes we get text like: `n/a`.
 2. **Unit Testing** I didn't focus on any type of testing either unit or E2E due to time limitation.
-3. **End-End Testing** 
+3. **End-End Testing**
+
+***Note:*** Run the command `cp .env.local .env` inside the project folder and run `npm start` after installing the dependencies and dev dependencies to avoid `env` variables hassle.
