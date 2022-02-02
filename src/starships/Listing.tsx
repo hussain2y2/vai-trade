@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 // Hero Icons
 import {PencilIcon, PlusIcon, SearchIcon} from '@heroicons/react/solid';
+// Redux actions and Root State
 import {useDispatch, useSelector} from 'react-redux';
-// starship reducer actions and Root State
 import {addFleet, selectDetail} from './starshipSlice';
 import {RootState} from '../store';
 // Custom utils

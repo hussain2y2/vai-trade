@@ -8,7 +8,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar = ({capacity, crew, passengers}: ProgressBarProps) => {
-  const usage = Math.ceil((parseFloat(crew + passengers)) * 100 / parseFloat(capacity));
+  const usage = (((+crew) + (+passengers)) * 100) / (+capacity);
   return (
     <div className='bg-gray-300 rounded-lg w-64 h-6 dark:bg-gray-700'>
       <div
@@ -19,7 +19,7 @@ const ProgressBar = ({capacity, crew, passengers}: ProgressBarProps) => {
             usage >= 35 && usage < 70 ? 'bg-orange-300' : '',
             usage < 35 ? 'bg-teal-400' : ''
           )}
-        style={{width: `${usage}%`}}/>
+        style={{width: `${Math.round(usage)}%`}}/>
     </div>
   );
 };

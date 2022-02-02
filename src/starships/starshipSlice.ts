@@ -15,18 +15,21 @@ export const starshipSlice = createSlice({
   initialState,
   reducers: {
     addFleet: (state, {payload}: PayloadAction<any>) => {
-      state.fleets.push(payload)
+      state.fleets.push(payload);
     },
     updateFleet: (state, {payload}: PayloadAction<any>) => {
-      state.fleets = state.fleets.map((task: any) => {
-        if (task.key === payload.id) {
-          task.title = payload.title
+      state.fleets = state.fleets.map((fleet: any) => {
+        // comparison with url as is the unique value
+        if (fleet.url === payload.url) {
+          fleet.passengers = payload.passengers;
         }
-        return task
+        return fleet;
       })
+      state.detail = {...state.detail, passengers: payload.passengers};
+      console.log(state.detail)
     },
     selectDetail: (state, {payload}: PayloadAction<any>) => {
-      state.detail = payload
+      state.detail = payload;
     }
   }
 })
