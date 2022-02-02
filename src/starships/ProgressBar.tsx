@@ -19,7 +19,7 @@ const ProgressBar = ({capacity, crew, passengers}: ProgressBarProps) => {
             usage >= 35 && usage < 70 ? 'bg-orange-300' : '',
             usage < 35 ? 'bg-teal-400' : ''
           )}
-        style={{width: `${Math.round(usage)}%`}}/>
+        style={{width: `${usage}%`}}/>
     </div>
   );
 };
