@@ -3,7 +3,7 @@ import React from 'react';
 import {MinusIcon, PlusIcon} from '@heroicons/react/solid';
 // Redux & store
 import {useDispatch, useSelector} from 'react-redux';
-import {updateFleet} from './starshipSlice';
+import {selectDetail, updateFleet, saveFleets} from './starshipSlice';
 import {RootState} from '../store';
 // Components
 import ProgressBar from './ProgressBar';
@@ -19,11 +19,29 @@ const Detail = () => {
       }
     }: any = useSelector((state: RootState) => state.starship);
     const dispatch = useDispatch();
+
+    // Add passengers
     const addPassenger = () => {
+      // TODO the passengers and crews are not coming in proper format (Can't do due to lack of time)
       const sum = (+passengers) + (+crew)
       if (sum < (+cargo_capacity)) {
         dispatch(updateFleet({passengers: (+passengers) + 1, url}));
       }
+    }
+    // Remove passengers
+    const removePassenger = () => {
+      if (+passengers > 0) {
+        dispatch(updateFleet({passengers: (+passengers) - 1, url}));
+      }
+    }
+    // Update passengers and go to listing page.
+    const updateFleets = () => {
+      dispatch(saveFleets({passengers, url}));
+      dispatch(selectDetail({}));
+    }
+    // Revoke added passenger & go to listing page
+    const cancelSaving = () => {
+      dispatch(selectDetail({}));
     }
     return (
       <div
@@ -51,19 +69,29 @@ const Detail = () => {
               >
                 <PlusIcon className="w-6 h-6"/>
               </button>
-              <button className="mt-1 font-bold text-white w-8 bg-red-300 rounded-lg p-1">
+              <button className="mt-1 font-bold text-white w-8 bg-red-300 rounded-lg p-1"
+                      onClick={() => removePassenger()}>
                 <MinusIcon className="w-6 h-6"/>
               </button>
             </div>
           </div>
           <div className="flex justify-between mt-16">
-            <button className="font-bold text-gray-600 bg-gray-300 rounded-lg px-7 py-2">Cancel</button>
-            <button className="font-bold text-gray-600 bg-gray-300 rounded-lg px-7 py-2">Save</button>
+            <button
+              className="font-bold text-gray-600 bg-gray-300 rounded-lg px-7 py-2"
+              onClick={() => cancelSaving()}
+            >
+              Cancel
+            </button>
+            <button
+              className="font-bold text-gray-600 bg-gray-300 rounded-lg px-7 py-2"
+              onClick={() => updateFleets()}
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
     );
   }
-;
 
 export default Detail;

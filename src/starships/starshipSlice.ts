@@ -18,6 +18,9 @@ export const starshipSlice = createSlice({
       state.fleets.push(payload);
     },
     updateFleet: (state, {payload}: PayloadAction<any>) => {
+      state.detail = {...state.detail, passengers: payload.passengers};
+    },
+    saveFleets: (state, {payload}: PayloadAction<any>) => {
       state.fleets = state.fleets.map((fleet: any) => {
         // comparison with url as is the unique value
         if (fleet.url === payload.url) {
@@ -25,8 +28,6 @@ export const starshipSlice = createSlice({
         }
         return fleet;
       })
-      state.detail = {...state.detail, passengers: payload.passengers};
-      console.log(state.detail)
     },
     selectDetail: (state, {payload}: PayloadAction<any>) => {
       state.detail = payload;
@@ -34,7 +35,7 @@ export const starshipSlice = createSlice({
   }
 })
 
-export const {actions: {addFleet, updateFleet, selectDetail}} = starshipSlice
+export const {actions: {addFleet, updateFleet, saveFleets, selectDetail}} = starshipSlice
 
 const starshipReducer = starshipSlice.reducer
 

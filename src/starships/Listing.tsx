@@ -25,7 +25,7 @@ const Listing = () => {
         console.log(error);
       }),
     [searchText],
-    1000
+    500
   );
   const {fleets} = useSelector((state: RootState) => state.starship);
   const dispatch = useDispatch();
