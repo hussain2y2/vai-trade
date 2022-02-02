@@ -16,7 +16,7 @@ const Fleets = () => {
 
   return(
     <div className="w-3/6 mr-5">
-      <div className="py-4 px-3 mx-auto bg-white rounded-xl border border-gray-200">
+      <div className="py-4 px-3 mx-auto bg-white rounded-xl border border-gray-200 min-h-full">
         <h3 className="text-2xl font-bold mx-5">Your Fleet</h3>
         {fleets.map((fleet: any, key: number) => <div className="flex justify-start items-center mx-5 mt-5" key={key}>
           <button className="font-bold w-14 h-14 bg-gray-400 rounded-full p-4 mr-3" onClick={() => dispatch(selectDetail(fleet))}>
