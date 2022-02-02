@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 // Hero Icons
-import {PencilIcon, PlusIcon, SearchIcon} from '@heroicons/react/solid';
+import {PencilIcon, PlusIcon, SearchIcon, XCircleIcon} from '@heroicons/react/solid';
 // Redux actions and Root State
 import {useDispatch, useSelector} from 'react-redux';
-import {addFleet, selectDetail} from './starshipSlice';
+import {addFleet, removeFleet, selectDetail} from './starshipSlice';
 import {RootState} from '../store';
 // Custom utils
 import {Api, useDebouncedEffect} from '../utils';
@@ -29,10 +29,15 @@ const Listing = () => {
   );
   const {fleets} = useSelector((state: RootState) => state.starship);
   const dispatch = useDispatch();
+
+  // Add starship to fleet list
   const addFleetHandler = (fleet: any) => {
     if (!fleets.find((f: any) => f.name === fleet.name)) {
       dispatch(addFleet(fleet))
     }
+  }
+  const removeFleetHandler = (url: string) => {
+    dispatch(removeFleet({url}))
   }
   return (
     <div className="flex justify-center m-5">
@@ -81,6 +86,9 @@ const Listing = () => {
                 className="text-sm font-medium text-white bg-gray-300 w-64 rounded-lg px-2 py-0.5 mb-1">{fleet.manufacturer}</div>
               <ProgressBar capacity={fleet.cargo_capacity} crew={fleet.crew} passengers={fleet.passengers}/>
             </div>
+            <button className="font-bold ml-3 text-red-400" onClick={() => removeFleetHandler(fleet.url)}>
+              <XCircleIcon className="w-8 h-8"/>
+            </button>
           </div>)}
         </div>
       </div>

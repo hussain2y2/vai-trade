@@ -29,13 +29,16 @@ export const starshipSlice = createSlice({
         return fleet;
       })
     },
+    removeFleet: (state, {payload}: PayloadAction<any>) => {
+      state.fleets = state.fleets.filter((fleet: any) => fleet.url !== payload.url)
+    },
     selectDetail: (state, {payload}: PayloadAction<any>) => {
       state.detail = payload;
     }
   }
 })
 
-export const {actions: {addFleet, updateFleet, saveFleets, selectDetail}} = starshipSlice
+export const {actions: {addFleet, updateFleet, saveFleets, removeFleet, selectDetail}} = starshipSlice
 
 const starshipReducer = starshipSlice.reducer
 
