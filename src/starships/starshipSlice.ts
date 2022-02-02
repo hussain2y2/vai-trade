@@ -1,11 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 export interface StarshipState {
+  starships: any,
   fleets: any,
   detail: object,
 }
 
 const initialState: StarshipState = {
+  starships: [],
   fleets: [],
   detail: {},
 }
@@ -14,6 +16,9 @@ export const starshipSlice = createSlice({
   name: 'starship',
   initialState,
   reducers: {
+    setStarships: (state, {payload}: PayloadAction<any>) => {
+      state.starships = payload
+    },
     addFleet: (state, {payload}: PayloadAction<any>) => {
       state.fleets.push(payload);
     },
@@ -38,7 +43,7 @@ export const starshipSlice = createSlice({
   }
 })
 
-export const {actions: {addFleet, updateFleet, saveFleets, removeFleet, selectDetail}} = starshipSlice
+export const {actions: {setStarships, addFleet, updateFleet, saveFleets, removeFleet, selectDetail}} = starshipSlice
 
 const starshipReducer = starshipSlice.reducer
 
